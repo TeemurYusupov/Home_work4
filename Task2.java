@@ -17,7 +17,51 @@ public class Task2 {
 
     public Deque<Integer> sum(Deque<Integer> d1, Deque<Integer> d2) {
 
-        return new ArrayDeque<>();
+        String firstNumber = "";
+        String secondNumber = "";
+        
+        // Converts the lists into strings
+        while (l1 != null){
+            
+            firstNumber += Integer.toString(l1.val);
+            l1 = l1.next;
+            
+        }
+        
+        while (l2 != null){
+            
+            secondNumber += Integer.toString(l2.val);
+            l2 = l2.next;
+            
+        }
+        
+        // Reverses the strings
+        firstNumber = new StringBuilder(firstNumber).reverse().toString();
+        secondNumber = new StringBuilder(secondNumber).reverse().toString();
+        
+        long additionLong = Long.parseLong(firstNumber) + Long.parseLong(secondNumber);
+    
+        ListNode solutionList = new ListNode();
+        ListNode prevNode = new ListNode();
+        ListNode currentNode = solutionList;
+        
+        while (additionLong > 0){
+            
+            currentNode.val = (int) additionLong % 10;
+            additionLong /= 10;
+            
+            ListNode nextNode = new ListNode();
+            currentNode.next = nextNode;
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+            
+        }
+        
+        prevNode.next = null;
+            
+        return solutionList;
+
+        
     }
 
 }
